@@ -66,7 +66,7 @@ def tratamento_prazos_diarios_agendados(base_agendados, base_centro_custo):
                                 (df_ajustado['Centro de Custo'] != ' ') &
                                 (df_ajustado['Centro de Custo'] != 'ADMINISTRACAO JUDICIAL')]
     
-    df_remove_tributarios = df_final[df_final['Célula'].str.contains('Tributário') == False]
+    df_remove_tributarios = df_final[df_final['Célula'].str.contains('Tributário') == True]
 
     df_final = df_final.drop(df_remove_tributarios.index)
 
@@ -127,7 +127,7 @@ def tratamento_prazos_diarios_pendentes(base_pendentes, base_centro_custo):
                 (df2_ajustado['Centro de Custo'] != ' ') &
                 (df_ajustado['Centro de Custo'] != 'ADMINISTRACAO JUDICIAL')]
     
-    df_remove_tributarios2 = df2_final[df2_final['Célula'].str.contains('Tributário') == False]
+    df_remove_tributarios2 = df2_final[df2_final['Célula'].str.contains('Tributário') == True]
 
     df2_final = df2_final.drop(df_remove_tributarios2.index)
 
