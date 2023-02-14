@@ -75,11 +75,24 @@ def tratamento_prazos_diarios_agendados(base_agendados, base_centro_custo):
 
     df_final = df_final.drop(df_remove_tributarios.index)
 
-    # colunas_datas = list(df_final.select_dtypes('datetime').columns)
-    # colunas_datas.append('Data de Reprovação')
-    # for i in colunas_datas:
-    #     df_final[i] = pd.to_datetime(df[i], format='%Y-%m-%d', errors='coerce')
-    #     df_final[i] = df[i].dt.strftime('%d/%m/%Y')
+    '''
+    Precisamos alterar o formato das datas para exportar os arquivos da forma correta.
+
+    Primeiro: precisamos declarar qual o formato das datas
+    Segundo: alteramos o formato para o desejado
+    '''
+    df_final['Data Cadastro Prazo'] = df_final.loc[:, ('Data Cadastro Prazo')].dt.strftime("%d/%m/%Y")
+    df_final['Data do Prazo'] = df_final.loc[:, ('Data do Prazo')].dt.strftime("%d/%m/%Y")
+    df_final['Data Inicio Compromisso'] = df_final.loc[:, ('Data Inicio Compromisso')].dt.strftime("%d/%m/%Y")
+    df_final['Data Conclusão'] = df_final.loc[:, ('Data Conclusão')].dt.strftime("%d/%m/%Y")
+    df_final['Data Protocolo'] = df_final.loc[:, ('Data Protocolo')].dt.strftime("%d/%m/%Y")
+    df_final['Data Auditoria Protocolo'] = df_final.loc[:, ('Data Auditoria Protocolo')].dt.strftime("%d/%m/%Y")
+    df_final['Prazo para Protocolo'] = df_final.loc[:, ('Prazo para Protocolo')].dt.strftime("%d/%m/%Y")
+    df_final['Data Prazo Automático'] = df_final.loc[:, ('Data Prazo Automático')].dt.strftime("%d/%m/%Y")
+    df_final['Data Revisão'] = df_final.loc[:, ('Data Revisão')].dt.strftime("%d/%m/%Y")
+    df_final['Prazo Revisão'] = df_final.loc[:, ('Prazo Revisão')].dt.strftime("%d/%m/%Y")
+    df_final['Data Cancelamento'] = df_final.loc[:, ('Data Cancelamento')].dt.strftime("%d/%m/%Y")
+    df_final['Data da contratação'] = df_final.loc[:, ('Data da contratação')].dt.strftime("%d/%m/%Y")
 
     # df_final.to_excel(f'BASE_TRATADA_AGENDADOS_{hoje}.xlsx', index=False, engine='openpyxl')
     return df_final
