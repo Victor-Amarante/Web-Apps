@@ -70,18 +70,55 @@ def tratamento_prazos_diarios_agendados(base_agendados, base_centro_custo):
 
     df_final = df_final.drop(df_remove_tributarios.index)
 
+    df_final['Data Cadastro Prazo'] = pd.to_datetime(df_final['Data Cadastro Prazo'])
+    df_final['Data Cadastro Prazo'] = df_final['Data Cadastro Prazo'].dt.strftime('%d/%m/%Y')
+    
+    df_final['Data do Prazo'] = pd.to_datetime(df_final['Data do Prazo'])
+    df_final['Data do Prazo'] = df_final['Data do Prazo'].dt.strftime('%d/%m/%Y')
+
+    df_final['Data Inicio Compromisso'] = pd.to_datetime(df_final['Data Inicio Compromisso'])
+    df_final['Data Inicio Compromisso'] = df_final['Data Inicio Compromisso'].dt.strftime('%d/%m/%Y')
+
+    df_final['Data Conclusão'] = pd.to_datetime(df_final['Data Conclusão'])
+    df_final['Data Conclusão'] = df_final['Data Conclusão'].dt.strftime('%d/%m/%Y')
+
+    df_final['Data Protocolo'] = pd.to_datetime(df_final['Data Protocolo'])
+    df_final['Data Protocolo'] = df_final['Data Protocolo'].dt.strftime('%d/%m/%Y')
+
+    df_final['Data Auditoria Protocolo'] = pd.to_datetime(df_final['Data Auditoria Protocolo'])
+    df_final['Data Auditoria Protocolo'] = df_final['Data Auditoria Protocolo'].dt.strftime('%d/%m/%Y')
+
+    df_final['Prazo para Protocolo'] = pd.to_datetime(df_final['Prazo para Protocolo'])
+    df_final['Prazo para Protocolo'] = df_final['Prazo para Protocolo'].dt.strftime('%d/%m/%Y')
+
+    df_final['Data Prazo Automático'] = pd.to_datetime(df_final['Data Prazo Automático'])
+    df_final['Data Prazo Automático'] = df_final['Data Prazo Automático'].dt.strftime('%d/%m/%Y')
+    
+    df_final['Data Revisão'] = pd.to_datetime(df_final['Data Revisão'])
+    df_final['Data Revisão'] = df_final['Data Revisão'].dt.strftime('%d/%m/%Y')
+    
+    df_final['Prazo Revisão'] = pd.to_datetime(df_final['Prazo Revisão'])
+    df_final['Prazo Revisão'] = df_final['Prazo Revisão'].dt.strftime('%d/%m/%Y')
+    
+    df_final['Data Cancelamento'] = pd.to_datetime(df_final['Data Cancelamento'])
+    df_final['Data Cancelamento'] = df_final['Data Cancelamento'].dt.strftime('%d/%m/%Y')
+    
+    df_final['Data da contratação'] = pd.to_datetime(df_final['Data da contratação'])
+    df_final['Data da contratação'] = df_final['Data da contratação'].dt.strftime('%d/%m/%Y')
+    
+
     # df_final['Data Cadastro Prazo'] = df_final.loc[:, ('Data Cadastro Prazo')].dt.strftime("%d/%m/%Y")
     # df_final['Data do Prazo'] = df_final.loc[:, ('Data do Prazo')].dt.strftime("%d/%m/%Y")
-    # df_final['Data Inicio Compromisso'] = df_final.loc[:, ('Data Inicio Compromisso')].dt.strftime("%d/%m/%Y")
-    # df_final['Data Conclusão'] = df_final.loc[:, ('Data Conclusão')].dt.strftime("%d/%m/%Y")
-    # df_final['Data Protocolo'] = df_final.loc[:, ('Data Protocolo')].dt.strftime("%d/%m/%Y")
-    # df_final['Data Auditoria Protocolo'] = df_final.loc[:, ('Data Auditoria Protocolo')].dt.strftime("%d/%m/%Y")
-    # df_final['Prazo para Protocolo'] = df_final.loc[:, ('Prazo para Protocolo')].dt.strftime("%d/%m/%Y")
-    # df_final['Data Prazo Automático'] = df_final.loc[:, ('Data Prazo Automático')].dt.strftime("%d/%m/%Y")
-    # df_final['Data Revisão'] = df_final.loc[:, ('Data Revisão')].dt.strftime("%d/%m/%Y")
-    # df_final['Prazo Revisão'] = df_final.loc[:, ('Prazo Revisão')].dt.strftime("%d/%m/%Y")
-    # df_final['Data Cancelamento'] = df_final.loc[:, ('Data Cancelamento')].dt.strftime("%d/%m/%Y")
-    # df_final['Data da contratação'] = df_final.loc[:, ('Data da contratação')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data Inicio Compromisso')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data Conclusão')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data Protocolo')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data Auditoria Protocolo')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Prazo para Protocolo')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data Prazo Automático')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data Revisão')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Prazo Revisão')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data Cancelamento')].dt.strftime("%d/%m/%Y")
+    # df_final[''] = df_final.loc[:, ('Data da contratação')].dt.strftime("%d/%m/%Y")
 
     # df_final.to_excel(f'BASE_TRATADA_AGENDADOS_{hoje}.xlsx', index=False, engine='openpyxl')
     return df_final
@@ -125,7 +162,7 @@ def tratamento_prazos_diarios_pendentes(base_pendentes, base_centro_custo):
                 (df2_ajustado['Centro de Custo'] != 'MONGERAL') &
                 (df2_ajustado['Centro de Custo'] != 'MARITIMO E PORTUARIO') &
                 (df2_ajustado['Centro de Custo'] != ' ') &
-                (df_ajustado['Centro de Custo'] != 'ADMINISTRACAO JUDICIAL')]
+                (df2_ajustado['Centro de Custo'] != 'ADMINISTRACAO JUDICIAL')]
     
     df_remove_tributarios2 = df2_final[df2_final['Célula'].str.contains('Tributário') == True]
 
@@ -145,7 +182,43 @@ def tratamento_prazos_diarios_pendentes(base_pendentes, base_centro_custo):
     df2_final.loc[filtro4, "Data Prazo Automático"] = df2_final['Prazo para Protocolo']
 
     filtro5 = ((df2_final['Status do Prazo'] == 'Aguardando Revisão') & (df2_final['Prazo Revisão'] >= pd.to_datetime(hoje)))
-    df2_final.loc[filtro5, "Data Prazo Automático"] = df2_final['Prazo Revisão']
+    df2_final.loc[filtro5, "Data Prazo Automático"] = df2_final['Prazo Revisão']    
+
+    df2_final['Data Cadastro Prazo'] = pd.to_datetime(df2_final['Data Cadastro Prazo'])
+    df2_final['Data Cadastro Prazo'] = df2_final['Data Cadastro Prazo'].dt.strftime('%d/%m/%Y')
+    
+    df2_final['Data do Prazo'] = pd.to_datetime(df2_final['Data do Prazo'])
+    df2_final['Data do Prazo'] = df2_final['Data do Prazo'].dt.strftime('%d/%m/%Y')
+
+    df2_final['Data Inicio Compromisso'] = pd.to_datetime(df2_final['Data Inicio Compromisso'])
+    df2_final['Data Inicio Compromisso'] = df2_final['Data Inicio Compromisso'].dt.strftime('%d/%m/%Y')
+
+    df2_final['Data Conclusão'] = pd.to_datetime(df2_final['Data Conclusão'])
+    df2_final['Data Conclusão'] = df2_final['Data Conclusão'].dt.strftime('%d/%m/%Y')
+
+    df2_final['Data Protocolo'] = pd.to_datetime(df2_final['Data Protocolo'])
+    df2_final['Data Protocolo'] = df2_final['Data Protocolo'].dt.strftime('%d/%m/%Y')
+
+    df2_final['Data Auditoria Protocolo'] = pd.to_datetime(df2_final['Data Auditoria Protocolo'])
+    df2_final['Data Auditoria Protocolo'] = df2_final['Data Auditoria Protocolo'].dt.strftime('%d/%m/%Y')
+
+    df2_final['Prazo para Protocolo'] = pd.to_datetime(df2_final['Prazo para Protocolo'])
+    df2_final['Prazo para Protocolo'] = df2_final['Prazo para Protocolo'].dt.strftime('%d/%m/%Y')
+
+    df2_final['Data Prazo Automático'] = pd.to_datetime(df2_final['Data Prazo Automático'])
+    df2_final['Data Prazo Automático'] = df2_final['Data Prazo Automático'].dt.strftime('%d/%m/%Y')
+    
+    df2_final['Data Revisão'] = pd.to_datetime(df2_final['Data Revisão'])
+    df2_final['Data Revisão'] = df2_final['Data Revisão'].dt.strftime('%d/%m/%Y')
+    
+    df2_final['Prazo Revisão'] = pd.to_datetime(df2_final['Prazo Revisão'])
+    df2_final['Prazo Revisão'] = df2_final['Prazo Revisão'].dt.strftime('%d/%m/%Y')
+    
+    df2_final['Data Cancelamento'] = pd.to_datetime(df2_final['Data Cancelamento'])
+    df2_final['Data Cancelamento'] = df2_final['Data Cancelamento'].dt.strftime('%d/%m/%Y')
+    
+    df2_final['Data da contratação'] = pd.to_datetime(df2_final['Data da contratação'])
+    df2_final['Data da contratação'] = df2_final['Data da contratação'].dt.strftime('%d/%m/%Y')
 
     # # Fazer a filtragem das datas anteriores a 2020 e remover as linhas
     # df_remove_data_under_2020 = df2_final['Data Prazo Automático'] < pd.to_datetime(date(2021,1,1))
