@@ -13,7 +13,7 @@ def generate_excel_download_link_agendados(df):
     df.to_excel(towrite, encoding="utf-8", index=False, header=True)  # write to BytesIO buffer
     towrite.seek(0)  # reset pointer
     b64 = base64.b64encode(towrite.read()).decode()
-    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="BASE_TRATADA_AGENDADOS.xlsx">Download Excel File</a>'
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="BASE_TRATADA_AGENDADOS_{hoje}.xlsx">Download Excel File</a>'
     return st.markdown(href, unsafe_allow_html=True)
 
 def generate_excel_download_link_pendentes(df):
@@ -22,7 +22,7 @@ def generate_excel_download_link_pendentes(df):
     df.to_excel(towrite, encoding="utf-8", index=False, header=True)  # write to BytesIO buffer
     towrite.seek(0)  # reset pointer
     b64 = base64.b64encode(towrite.read()).decode()
-    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="BASE_TRATADA_PENDENTES.xlsx">Download Excel File</a>'
+    href = f'<a href="data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,{b64}" download="BASE_TRATADA_PENDENTES_{hoje}.xlsx">Download Excel File</a>'
     return st.markdown(href, unsafe_allow_html=True)
 
 # -- BASE PRAZOS DIARIOS AGENDADOS
