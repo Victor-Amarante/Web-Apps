@@ -180,7 +180,6 @@ if choices == 'Agendados':
         tratar_button = st.button('Tratamento dos agendados')
         if tratar_button:
             agendados_tratado = tratamento_prazos_diarios_agendados(uploaded_file, centro_de_custo)
-            st.dataframe(agendados_tratado)
             generate_excel_download_link_agendados(agendados_tratado)
             st.success('A base foi tratada e está disponível para download.')
 
@@ -195,7 +194,6 @@ if choices == 'Pendentes':
         tratar_pendentes_button = st.button('Tratamento dos pendentes')
         if tratar_pendentes_button:
             pendentes_tratado = tratamento_prazos_diarios_pendentes(file_pendentes, centro_de_custo)
-            st.dataframe(pendentes_tratado)
             generate_excel_download_link_pendentes(pendentes_tratado)
             st.success('A base foi tratada e está disponível para download.')
 
