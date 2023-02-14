@@ -63,7 +63,17 @@ def tratamento_prazos_diarios_agendados(base_agendados, base_centro_custo):
                                 (df_ajustado['Centro de Custo'] != 'EQUIPE PARAÍBA') &
                                 (df_ajustado['Centro de Custo'] != 'MONGERAL') &
                                 (df_ajustado['Centro de Custo'] != 'MARITIMO E PORTUARIO') &
-                                (df_ajustado['Centro de Custo'] != ' ')]
+                                (df_ajustado['Centro de Custo'] != ' ') &
+                                (df_ajustado['Centro de Custo'] != 'ADMINISTRACAO JUDICIAL')]
+    
+    df_remove_tributarios = df_final[(df_final['Célula'].str.contains('Tributário') == False) |
+                                        (df_final['Célula'].str.contains('tributário') == False) |
+                                        (df_final['Célula'].str.contains('TRIBUTÁRIO') == False) |
+                                        (df_final['Célula'].str.contains('Tributario') == False) |
+                                        (df_final['Célula'].str.contains('tributario') == False) |
+                                        (df_final['Célula'].str.contains('TRIBUTARIO') == False)]
+
+    df_final = df_final.drop(df_remove_tributarios.index)
 
     # colunas_datas = list(df_final.select_dtypes('datetime').columns)
     # colunas_datas.append('Data de Reprovação')
@@ -112,7 +122,17 @@ def tratamento_prazos_diarios_pendentes(base_pendentes, base_centro_custo):
                 (df2_ajustado['Centro de Custo'] != 'EQUIPE PARAÍBA') &
                 (df2_ajustado['Centro de Custo'] != 'MONGERAL') &
                 (df2_ajustado['Centro de Custo'] != 'MARITIMO E PORTUARIO') &
-                (df2_ajustado['Centro de Custo'] != ' ')]
+                (df2_ajustado['Centro de Custo'] != ' ') &
+                (df_ajustado['Centro de Custo'] != 'ADMINISTRACAO JUDICIAL')]
+    
+    df_remove_tributarios2 = df2_final[(df2_final['Célula'].str.contains('Tributário') == False) |
+                                        (df2_final['Célula'].str.contains('tributário') == False) |
+                                        (df2_final['Célula'].str.contains('TRIBUTÁRIO') == False) |
+                                        (df2_final['Célula'].str.contains('Tributario') == False) |
+                                        (df2_final['Célula'].str.contains('tributario') == False) |
+                                        (df2_final['Célula'].str.contains('TRIBUTARIO') == False)]
+
+    df2_final = df2_final.drop(df_remove_tributarios2.index)
 
     # Filtragens das datas
     filtro1 = (((df2_final['Status do Prazo'] == 'Pendente') | (df2_final['Status do Prazo'] == 'Nao Protocolada')) & (df2_final['Data Prazo Automático'].isnull()))
